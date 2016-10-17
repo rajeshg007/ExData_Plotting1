@@ -11,9 +11,12 @@ myData <- read.csv.sql(dataFile,mySql,header = TRUE,sep = ";")
 # Extract data for Global Active Power 
 globalActivePower <- as.numeric(myData$Global_active_power)
 
-#set the parameters for the image
-png("plot1.png", width=480, height=480)
+# Extract datetime values
+datetime <- strptime(paste(myData$Date, myData$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
 
-hist(globalActivePower, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
+#set the parameters for the image
+png("plot2.png", width=480, height=480)
+
+plot(datetime, globalActivePower, type="l", xlab="", ylab="Global Active Power (kilowatts)")
 
 dev.off()
